@@ -8,7 +8,6 @@ type Props = {
 };
 const { pageTitle } = Astro.props;
 ---
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -16,6 +15,11 @@ const { pageTitle } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content = {Astro.generator} />
     <title>{pageTitle}</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <Header/>
