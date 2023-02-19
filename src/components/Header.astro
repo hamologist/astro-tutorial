@@ -1,74 +1,19 @@
 ---
+import Hamburger from "./Hamburger.astro";
+import Navigation from "./Navigation.astro";
 ---
 <style>
-  nav-hamburger {
-    padding-right: 20px;
-    cursor: pointer;
-    display: block;
-  }
-
-  nav-hamburger span {
-    display: block;
-    width: 40px;
-    height: 5px;
-    margin-bottom: 10px;
-    background-color: #ff9776;
-  }
-
-  nav-links {
-    width: 100%;
-    top: 5rem;
-    left: 48px;
-    background-color: #ff9776;
-    display: none;
-    margin: 0;
-  }
-
-  nav-links a {
-    display: block;
-    text-align: center;
-    padding: 10px 0;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  nav-links a:hover, a:focus {
-    background-color: #ff9776;
-  }
-
-  .expanded {
-    display: unset;
-  }
-
-  @media screen and (min-width: 636px) {
-    nav-links {
-      margin-left: 5em;
-      display: block;
-      position: static;
-      width: auto;
-      background: none;
-    }
-
-    nav-links a {
-      display: inline-block;
-      padding: 15px 20px;
-    }
-
-    nav-hamburger {
-      display: none;
-    }
-  }
 </style>
 
 <script>
-  class NavHeader extends HTMLElement {
+  import type { NavHeaderElement, NavHamburgerElement, NavLinksElement } from '../scripts/nav';
+
+  class NavHeader extends HTMLElement implements NavHeaderElement {
     constructor() {
       super();
 
-      const navHamburger = this.querySelector<NavHamburger>('nav-hamburger');
-      const navLinks = this.querySelector<NavLinks>('nav-links');
+      const navHamburger = this.querySelector<NavHamburgerElement>('nav-hamburger');
+      const navLinks = this.querySelector<NavLinksElement>('nav-links');
       if (navHamburger !== null && navLinks !== null) {
         navHamburger.addEventListener('click', () => {
           navLinks.toggle();
@@ -77,29 +22,9 @@
     }
   }
   customElements.define('nav-header', NavHeader);
-
-  class NavHamburger extends HTMLElement {}
-  customElements.define('nav-hamburger', NavHamburger);
-
-  class NavLinks extends HTMLElement {
-    toggle() {
-      this.classList.toggle("expanded");
-    }
-  }
-  customElements.define('nav-links', NavLinks);
 </script>
 
 <nav-header>
-  <nav>
-    <nav-hamburger>
-      <span/>
-      <span/>
-      <span/>
-    </nav-hamburger>
-    <nav-links class="nav-links">
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-      <a href="/blog">Blog</a>
-    </nav-links>
-  </nav>
+  <Hamburger />
+  <Navigation />
 </nav-header>
