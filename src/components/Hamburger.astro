@@ -1,0 +1,46 @@
+--- 
+export interface HamburgerType extends HTMLElement {
+  expanded: boolean;
+};
+---
+<style>
+  hamburger-toggle {
+    padding-right: 20px;
+    cursor: pointer;
+    display: block;
+  }
+
+  hamburger-toggle span {
+    display: block;
+    width: 40px;
+    height: 5px;
+    margin-bottom: 10px;
+    background-color: #ff9776;
+  }
+
+  @media screen and (min-width: 636px) {
+    hamburger-toggle {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  class NavHamburger extends HTMLElement {
+    public expanded: boolean;
+
+    constructor() {
+      super();
+
+      this.expanded = false;
+    }
+  }
+
+  customElements.define('nav-hamburger', NavHamburger);
+</script>
+
+<nav-hamburger>
+  <span/>
+  <span/>
+  <span/>
+</nav-hamburger>
