@@ -1,15 +1,25 @@
 ---
+import BlogPost from "../components/BlogPost.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import type { PostFrontmatter } from "../types/blog";
 
+const allPosts = await Astro.glob<PostFrontmatter>('../pages/posts/*.md');
 const pageTitle = "My Astro Learning Blog";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <p>This is where I will post about my journey learning Astro.</p>
   <ul>
-    <li><a href="/posts/post-1/">Post 1</a></li>
-    <li><a href="/posts/post-2/">Post 2</a></li>
-    <li><a href="/posts/post-3/">Post 3</a></li>
+    {(() => {
+      const blogPosts: typeof BlogPost[] = [];
+      for (const post of allPosts) {
+        if (post.url !== undefined) {
+          blogPosts.push(<BlogPost url={post.url} title={post.frontmatter.title} />);
+        }
+      }
+
+      return blogPosts;
+    })()}
   </ul>
 </BaseLayout>
 

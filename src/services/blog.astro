@@ -1,0 +1,16 @@
+---
+import type { PostFrontmatter } from "../types/blog";
+
+export async function getAllTags() {
+  const allPosts = await Astro.glob<PostFrontmatter>('../pages/posts/*.md');
+  const allTags = new Set<string>();
+
+  for (const post of allPosts) {
+    for (const tag of post.frontmatter.tags) {
+      allTags.add(tag);
+    }
+  }
+
+  return allTags;
+}
+---

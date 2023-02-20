@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tags from "../../components/Tags.astro";
+import { getAllTags } from "../../services/blog.astro";
+
+const allTags = [...(await getAllTags())];
+---
+<BaseLayout pageTitle="Tag Index">
+  <Tags tags={allTags}/>
+</BaseLayout>
