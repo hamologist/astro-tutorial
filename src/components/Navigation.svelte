@@ -1,5 +1,5 @@
 <style>
-  nav-links a {
+  div a {
     text-align: center;
     padding: 10px 0;
     text-decoration: none;
@@ -8,27 +8,31 @@
     text-transform: uppercase;
   }
 
-  nav-links a:hover, a:focus {
+  .dark div a {
+    color: #fff;
+  }
+
+  div a:hover, a:focus {
     background-color: #ff9776;
   }
 
   @media screen and (min-width: 636px) {
-    nav-links {
+    div {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       grid-gap: 1rem;
       margin: 0;
     }
 
-    nav-links a {
+    div a {
       padding: 15px 20px;
     }
   }
 
   @media screen and (max-width: 636px) {
-    nav-links {
+    div {
       display: none;
-      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
       grid-gap: 1rem;
       margin: 0;
     }
@@ -39,20 +43,17 @@
   }
 </style>
 
-<script>
-  import type { NavLinksElement } from '../scripts/nav';
+<script lang="ts">
+    import ThemeIcon from "./ThemeIcon.svelte";
 
-  export class NavLinks extends HTMLElement implements NavLinksElement {
-    toggle() {
-      this.classList.toggle("expanded");
-    }
-  }
-  customElements.define('nav-links', NavLinks);
+
+  export let expanded: boolean;
 </script>
 
-<nav-links>
+<div class:expanded={expanded}>
   <a href="/">Home</a>
   <a href="/about">About</a>
   <a href="/blog">Blog</a>
   <a href="/tags">Tags</a>
-</nav-links>
+  <ThemeIcon />
+</div>
